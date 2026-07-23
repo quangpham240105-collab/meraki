@@ -55,6 +55,7 @@ while ($listener.IsListening) {
             }
             
             $response.ContentType = $contentType
+            $response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate")
             $response.ContentLength64 = $bytes.Length
             $response.OutputStream.Write($bytes, 0, $bytes.Length)
         } else {

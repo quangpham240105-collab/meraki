@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initI18n();
   initNavbarScroll();
+  initMobileMenu();
   initGrowCarousel();
   initTestimonialSlider();
   initFaqAccordion();
@@ -19,6 +20,11 @@ const i18nData = {
   vi: {
     // Navigation
     nav_subtitle: "Xây dựng bằng Trái tim.",
+    nav_home: "Trang Chủ",
+    nav_expect: "Giá Trị Kỳ Vọng",
+    nav_talent: "Meraki Talent ↗",
+    nav_grow: "Phát Triển Doanh Nghiệp",
+    nav_faq: "Hỏi Đáp",
     talent_nav_back: "Quay lại Trang Chủ",
     
     // Index Hero
@@ -155,6 +161,11 @@ const i18nData = {
   en: {
     // Navigation
     nav_subtitle: "Created by Heart.",
+    nav_home: "Home",
+    nav_expect: "What to Expect",
+    nav_talent: "Meraki Talent ↗",
+    nav_grow: "Grow Business",
+    nav_faq: "FAQ",
     talent_nav_back: "Back to Home",
     
     // Index Hero
@@ -352,7 +363,7 @@ function applyLanguage(lang) {
 }
 
 /* --------------------------------------------------------------------------
-   1. Navbar Scroll Blur Effect
+   1. Navbar Scroll & Mobile Navigation Menu
    -------------------------------------------------------------------------- */
 function initNavbarScroll() {
   const navbar = document.getElementById('navbar');
@@ -363,6 +374,49 @@ function initNavbarScroll() {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
+    }
+  });
+}
+
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const drawer = document.getElementById('mobileNavDrawer');
+  if (!toggleBtn || !drawer) return;
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isActive = drawer.classList.contains('active');
+    if (isActive) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  function openMenu() {
+    toggleBtn.classList.add('active');
+    drawer.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    toggleBtn.classList.remove('active');
+    drawer.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Close when clicking nav links inside mobile menu
+  const links = drawer.querySelectorAll('a, button');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Close when clicking outside navbar & drawer
+  document.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
     }
   });
 }
@@ -431,21 +485,39 @@ function initTestimonialSlider() {
   const testiTrack = document.getElementById('testiTrack');
   const testiPrev = document.getElementById('testiPrev');
   const testiNext = document.getElementById('testiNext');
+  const wrapper = document.querySelector('.testimonial-slider-wrapper');
 
   if (!testiTrack || !testiPrev || !testiNext) return;
 
-  const cardWidth = 480; // Card width + gap
   let currentScroll = 0;
 
+  function getStepWidth() {
+    const firstCard = testiTrack.querySelector('.testimonial-card');
+    if (!firstCard) return 360;
+    const cardWidth = firstCard.offsetWidth;
+    const gap = parseInt(window.getComputedStyle(testiTrack).gap) || 30;
+    return cardWidth + gap;
+  }
+
   testiNext.addEventListener('click', () => {
-    const maxScroll = testiTrack.scrollWidth - testiTrack.clientWidth;
-    currentScroll = Math.min(currentScroll + cardWidth, maxScroll);
-    testiTrack.style.transform = `translateX(-${currentScroll}px)`;
+    const step = getStepWidth();
+    if (window.innerWidth <= 768 && wrapper) {
+      wrapper.scrollBy({ left: step, behavior: 'smooth' });
+    } else {
+      const maxScroll = testiTrack.scrollWidth - testiTrack.clientWidth;
+      currentScroll = Math.min(currentScroll + step, maxScroll);
+      testiTrack.style.transform = `translateX(-${currentScroll}px)`;
+    }
   });
 
   testiPrev.addEventListener('click', () => {
-    currentScroll = Math.max(currentScroll - cardWidth, 0);
-    testiTrack.style.transform = `translateX(-${currentScroll}px)`;
+    const step = getStepWidth();
+    if (window.innerWidth <= 768 && wrapper) {
+      wrapper.scrollBy({ left: -step, behavior: 'smooth' });
+    } else {
+      currentScroll = Math.max(currentScroll - step, 0);
+      testiTrack.style.transform = `translateX(-${currentScroll}px)`;
+    }
   });
 }
 
