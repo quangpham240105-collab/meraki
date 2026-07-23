@@ -126,47 +126,6 @@ img {
   letter-spacing: 0.5px;
 }
 
-/* Desktop Navigation Menu */
-.desktop-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  margin-left: 40px;
-}
-
-.nav-link {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  transition: color 0.25s ease, transform 0.25s ease;
-  position: relative;
-  padding: 4px 0;
-}
-
-.nav-link:hover {
-  color: #ffffff;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: var(--color-orange);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.nav-link-talent {
-  color: var(--color-orange);
-  font-weight: 700;
-}
-
 /* Nav Tools & Language Switcher */
 .nav-right-tools {
   display: flex;
@@ -1787,10 +1746,6 @@ img {
 
 /* Tablet & Smaller Devices (max-width: 992px) */
 @media (max-width: 992px) {
-  .desktop-nav {
-    display: none;
-  }
-  
   .mobile-menu-toggle {
     display: flex;
   }
