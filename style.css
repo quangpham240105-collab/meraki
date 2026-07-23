@@ -1100,21 +1100,25 @@ img {
 .back-home-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--color-orange);
-  font-weight: 600;
-  font-size: 14px;
-  padding: 8px 18px;
-  background: rgba(252, 152, 2, 0.1);
-  border: 1px solid rgba(252, 152, 2, 0.3);
-  border-radius: 30px;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 14px;
+  background: rgba(252, 152, 2, 0.12);
+  border: 1px solid rgba(252, 152, 2, 0.35);
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  text-decoration: none;
 }
 
 .back-home-btn:hover {
   background: var(--color-orange);
   color: #000;
   transform: translateX(-3px);
+  box-shadow: 0 4px 14px rgba(252, 152, 2, 0.35);
 }
 
 /* Hero Section */
@@ -1857,7 +1861,11 @@ img {
   }
 
   .nav-subtitle {
-    font-size: 12px;
+    display: none;
+  }
+
+  .nav-right-tools {
+    gap: 8px;
   }
 
   /* Section Paddings on Mobile */

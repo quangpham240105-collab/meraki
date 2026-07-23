@@ -25,7 +25,7 @@ const i18nData = {
     nav_talent: "Meraki Talent ↗",
     nav_grow: "Phát Triển Doanh Nghiệp",
     nav_faq: "Hỏi Đáp",
-    talent_nav_back: "Quay lại Trang Chủ",
+    talent_nav_back: "Home",
     
     // Index Hero
     hero_title: "Nguồn Lực Marketing Linh Hoạt Cho Sự Phát Triển Bền Vững",
@@ -166,7 +166,7 @@ const i18nData = {
     nav_talent: "Meraki Talent ↗",
     nav_grow: "Grow Business",
     nav_faq: "FAQ",
-    talent_nav_back: "Back to Home",
+    talent_nav_back: "Home",
     
     // Index Hero
     hero_title: "Agile Marketing Resources For Sustainable Growth",
